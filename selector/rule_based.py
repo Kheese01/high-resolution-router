@@ -11,3 +11,6 @@ class RuleBasedSelector(BaseSelector):
             return "realesrgan"
         else:
             return "swinir"
+    
+    def __call__(self, img):
+        return self.select(img)
