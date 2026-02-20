@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual env
+HR-env/
+.env/
+
+# Model weights
+model_weights/
+*.pth
+*.pkl
+
+# Outputs
+output/
+outputs/
+
+# OS
+.DS_Store
+Thumbs.db
