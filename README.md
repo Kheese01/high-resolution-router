@@ -184,6 +184,83 @@ It combines:
 
 MIT License
 
+---
+
+## Development Workflow
+
+This project follows a simple Git branching strategy:
+
+### Branches
+
+- `main`  
+  Stable production-ready branch.
+
+- `develop`  
+  Active development branch. All features are merged here first.
+
+- `feature/*`  
+  Feature branches created from `develop`.
+
+---
+
+### How to Develop
+
+1. Switch to develop branch:
+
+```bash
+git checkout develop
+````
+
+2. Create a feature branch:
+
+```bash
+git checkout -b feature/your-feature-name
 ```
+
+3. Commit using conventional commit format:
+
+```bash
+git commit -m "feat: add new feature"
+```
+
+4. Push branch and open a Pull Request to `develop`.
+
+---
+
+### Release Process
+
+When releasing a new version:
+
+1. Merge `develop` into `main`
+2. Update:
+
+   * `VERSION`
+   * `CHANGELOG.md`
+3. Commit release:
+
+```bash
+git commit -m "chore: release vX.Y.Z"
+```
+
+4. Create tag:
+
+```bash
+git tag -a vX.Y.Z -m "Release vX.Y.Z"
+git push origin main --tags
+```
+
+---
+
+### Commit Message Convention
+
+This project uses Conventional Commits:
+
+* `feat:` New feature
+* `fix:` Bug fix
+* `docs:` Documentation changes
+* `refactor:` Code refactoring
+* `chore:` Maintenance tasks
+
+````
 
 ---
