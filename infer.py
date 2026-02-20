@@ -6,7 +6,7 @@ def run(input_path, output_path):
     img = cv2.imread(input_path)
 
     selector = build_selector(
-        mode="learned",
+        mode="rule",
         model_path="model_weights/selector.pkl"
     )
 
