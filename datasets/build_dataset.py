@@ -18,7 +18,7 @@ def load_image(path):
 
 def main():
 
-    enhancers = create_enhancers()
+    enhancers = create_enhancer()
 
     rows = []
 
