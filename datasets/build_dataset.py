@@ -18,11 +18,17 @@ def load_image(path):
 
 def main():
 
-    enhancers = create_enhancer()
+    enhancers = {
+    "swinir": create_enhancer("swinir", device="cpu"),
+    "realesrgan": create_enhancer("realesrgan", device="cpu"),
+    }
 
     rows = []
 
     for name in os.listdir(LR_DIR):
+        
+        if not name.lower().endswith((".png", ".jpg", ".jpeg")):
+            continue
 
         lr_path = os.path.join(LR_DIR, name)
         hr_path = os.path.join(HR_DIR, name)
@@ -32,6 +38,10 @@ def main():
 
         lr = load_image(lr_path)
         hr = load_image(hr_path)
+
+        if lr is None or hr is None:
+            print("failed to load:", name)
+            continue
 
         features, label, scores = build_sample(lr, hr, enhancers)
 
@@ -44,6 +54,12 @@ def main():
     with open(OUTPUT_FILE, "w", newline="") as f:
 
         writer = csv.writer(f)
+        writer.writerow([
+            "edge_density",
+            "color_variance",
+            "high_freq_energy",
+            "best_model"
+            ])
         writer.writerows(rows)
 
     print("dataset saved:", OUTPUT_FILE)
