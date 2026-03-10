@@ -6,17 +6,29 @@ __pycache__/
 
 # Virtual env
 HR-env/
-.env/
+venv/
+.env
+
+# Dataset
+datasets/DIV2K/
+datasets/router_dataset.csv
 
 # Model weights
 model_weights/
 *.pth
 *.pkl
+*.pt
+*.ckpt
 
 # Outputs
 output/
 outputs/
+results/
 
 # OS
 .DS_Store
 Thumbs.db
+
+# IDE
+.vscode/
+.idea/
