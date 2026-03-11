@@ -18,24 +18,18 @@ def load_image(path):
 
 def main():
 
-<<<<<<< HEAD
     enhancers = {
     "swinir": create_enhancer("swinir", device="cpu"),
     "realesrgan": create_enhancer("realesrgan", device="cpu"),
     }
-=======
-    enhancers = create_enhancers()
->>>>>>> a6c0c6c (feat: implement SR benchmark dataset pipeline (#16))
 
     rows = []
+    count = 0
 
-    for name in os.listdir(LR_DIR):
-<<<<<<< HEAD
+    for name in sorted(os.listdir(LR_DIR)):
         
         if not name.lower().endswith((".png", ".jpg", ".jpeg")):
             continue
-=======
->>>>>>> a6c0c6c (feat: implement SR benchmark dataset pipeline (#16))
 
         lr_path = os.path.join(LR_DIR, name)
         hr_path = os.path.join(HR_DIR, name)
@@ -46,36 +40,36 @@ def main():
         lr = load_image(lr_path)
         hr = load_image(hr_path)
 
-<<<<<<< HEAD
         if lr is None or hr is None:
             print("failed to load:", name)
             continue
 
-=======
->>>>>>> a6c0c6c (feat: implement SR benchmark dataset pipeline (#16))
+        if lr.shape[0] * 4 != hr.shape[0] or lr.shape[1] * 4 != hr.shape[1]:
+            print("size mismatch:", name)
+            continue
+
         features, label, scores = build_sample(lr, hr, enhancers)
 
         row = list(features) + [label]
 
         rows.append(row)
+        count += 1
 
         print("processed:", name)
 
     with open(OUTPUT_FILE, "w", newline="") as f:
 
         writer = csv.writer(f)
-<<<<<<< HEAD
         writer.writerow([
             "edge_density",
             "color_variance",
             "high_freq_energy",
             "best_model"
             ])
-=======
->>>>>>> a6c0c6c (feat: implement SR benchmark dataset pipeline (#16))
         writer.writerows(rows)
 
     print("dataset saved:", OUTPUT_FILE)
+    print("total samples:", count)
 
 
 if __name__ == "__main__":
